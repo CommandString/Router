@@ -296,9 +296,9 @@ class Router
     /**
      * Triggers 404 response
      *
-     * @param string $pattern A route pattern such as /about/system
+     * @param string|array $pattern A route pattern such as /about/system
      */
-    public function trigger404(string $match = null): void
+    public function trigger404(string|array $match = null): void
     {
         // Counter to keep track of the number of routes we've handled
         $numHandled = 0;
@@ -353,11 +353,11 @@ class Router
     *
     * @param string $pattern
     * @param string $uri
-    * @param array $matches
+    * @param array|null $matches
     *
     * @return bool -> is match yes/no
     */
-    private function patternMatches(string $pattern, string $uri, array &$matches): bool
+    private function patternMatches(string $pattern, string $uri, array|null &$matches): bool
     {
       // Replace all curly braces matches {} into word patterns (like Laravel)
       $pattern = preg_replace('/\/{(.*?)}/', '/(.*?)', $pattern);
