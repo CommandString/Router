@@ -1,0 +1,15 @@
+{
+    "name": "commandstring/router",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "CommandString\\Router\\": "src/",
+            "CommandString\\Testing\\": "testing/"
+        }
+    },
+    "require": {
+        "httpsoft/http-response": "^1.0",
+        "httpsoft/http-emitter": "^1.0"
+    }
+}
