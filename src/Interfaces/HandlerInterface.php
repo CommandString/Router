@@ -5,7 +5,7 @@ namespace CommandString\Router\Interfaces;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class HandlerInterface {
-    abstract public function handle(): ResponseInterface;
+    abstract public function handle(ResponseInterface $response, array $parameters): ResponseInterface;
 
     public static function new(): self
     {

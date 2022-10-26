@@ -4,8 +4,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "CommandString\\Router\\": "src/",
-            "CommandString\\Testing\\": "testing/"
+            "CommandString\\Router\\": "src/"
         }
     },
     "require": {

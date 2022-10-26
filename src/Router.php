@@ -4,6 +4,7 @@ namespace CommandString\Router;
 
 use CommandString\Router\Interfaces\HandlerInterface;
 use HttpSoft\Emitter\SapiEmitter;
+use HttpSoft\Message\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -12,14 +13,19 @@ use Psr\Http\Message\ResponseInterface;
 class Router
 {
     /**
-     * @var array The route patterns and their handling functions
-     */
-    private array $afterRoutes = array();
-
-    /**
      * @var array The before middleware route patterns and their handling functions
      */
     private array $beforeRoutes = array();
+    
+    /**
+     * @var array The route patterns and their handling functions
+     */
+    private array $routes = array();
+
+    /**
+     * @var array The route patterns and their handling functions
+     */
+    private array $afterRoutes = array();
 
     /**
      * @var array [object|callable] The function to be executed when no route has been matched
@@ -62,6 +68,26 @@ class Router
     }
 
     /**
+     * Store a after middleware route and a handling function to be executed when accessed using one of the specified methods.
+     *
+     * @param string                    $methods Allowed methods, | delimited
+     * @param string                    $pattern A route pattern such as /about/system
+     * @param HandlerInterface|callable $fn      The handling function to be executed
+     */
+    public function after(string $methods, string $pattern, callable|HandlerInterface $fn): void
+    {
+        $pattern = $this->baseRoute . '/' . trim($pattern, '/');
+        $pattern = $this->baseRoute ? rtrim($pattern, '/') : $pattern;
+
+        foreach (explode('|', $methods) as $method) {
+            $this->afterRoutes[$method][] = array(
+                'pattern' => $pattern,
+                'fn' => $fn,
+            );
+        }
+    }
+
+    /**
      * Store a route and a handling function to be executed when accessed using one of the specified methods.
      *
      * @param string                    $methods Allowed methods, | delimited
@@ -74,7 +100,7 @@ class Router
         $pattern = $this->baseRoute ? rtrim($pattern, '/') : $pattern;
 
         foreach (explode('|', $methods) as $method) {
-            $this->afterRoutes[$method][] = array(
+            $this->routes[$method][] = array(
                 'pattern' => $pattern,
                 'fn' => $fn,
             );
@@ -248,6 +274,8 @@ class Router
         // Define which method we need to handle
         $this->requestedMethod = $this->getRequestMethod();
 
+        $this->response = new Response();
+
         // Handle all before middlewares
         if (isset($this->beforeRoutes[$this->requestedMethod])) {
             $this->handle($this->beforeRoutes[$this->requestedMethod]);
@@ -255,15 +283,21 @@ class Router
 
         // Handle all routes
         $numHandled = 0;
-        if (isset($this->afterRoutes[$this->requestedMethod])) {
-            $numHandled = $this->handle($this->afterRoutes[$this->requestedMethod], true);
+        if (isset($this->routes[$this->requestedMethod])) {
+            $numHandled = $this->handle($this->routes[$this->requestedMethod], true);
         }
 
         // If no route was handled, trigger the 404 (if any)
         if ($numHandled === 0) {
-            $this->trigger404($this->afterRoutes[$this->requestedMethod]);
+            $this->response = new Response();
+            $this->trigger404([$this->requestedMethod]);
         } // If a route was handled, perform the finish callback (if any)
         else {
+            // Handle all after middlewares
+            if (isset($this->afterRoutes[$this->requestedMethod])) {
+                $numHandled = $this->handle($this->afterRoutes[$this->requestedMethod]);
+            }
+
             if ($callback && is_callable($callback)) {
                 $callback();
             }
@@ -272,6 +306,8 @@ class Router
         // If it originally was a HEAD request, clean up after ourselves by emptying the output buffer
         if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
             ob_end_clean();
+        } else {
+            (new SapiEmitter())->emit($this->response);
         }
 
         // Return true if a route was handled, false otherwise
@@ -281,10 +317,10 @@ class Router
     /**
      * Set the 404 handling function.
      *
-     * @param object|callable|string $match_fn The function to be executed
-     * @param object|callable $fn The function to be executed
+     * @param string $match_fn The function to be executed
+     * @param HandlerInterface|callable $fn The function to be executed
      */
-    public function set404(object|callable|string $match_fn, object|callable $fn = null): void
+    public function set404(string $match_fn, HandlerInterface|callable $fn = null): void
     {
       if (!is_null($fn)) {
         $this->notFoundCallback[$match_fn] = $fn;
@@ -369,12 +405,12 @@ class Router
     /**
      * Handle a a set of routes: if a match is found, execute the relating handling function.
      *
-     * @param array $routes       Collection of route patterns and their handling functions
-     * @param bool  $quitAfterRun Does the handle function need to quit after one route was matched?
+     * @param array     $routes       Collection of route patterns and their handling functions
+     * @param bool      $quitAfterRun Does the handle function need to quit after one route was matched?
      *
      * @return int The number of routes handled
      */
-    private function handle($routes, $quitAfterRun = false)
+    private function handle(array $routes, $quitAfterRun = false)
     {
         // Counter to keep track of the number of routes we've handled
         $numHandled = 0;
@@ -384,7 +420,6 @@ class Router
 
         // Loop all routes
         foreach ($routes as $route) {
-
             // get routing matches
             $is_match = $this->patternMatches($route['pattern'], $uri, $matches);
 
@@ -426,16 +461,16 @@ class Router
     private function invoke($fn, $params = array())
     {
         if (is_callable($fn)) {
-            $response = call_user_func($fn);
+            $response = call_user_func($fn, $this->response, $params);
 
             if (!$response instanceof ResponseInterface) {
                 throw new \RuntimeException("Your method handler must return an instance of ResponseInterface.");
             }
         } else {
-            $response = $fn->handle();
+            $response = $fn->handle($this->response, $params);
         }
 
-        (new SapiEmitter())->emit($response);
+        $this->response = $response;
     }
 
     /**
@@ -473,7 +508,7 @@ class Router
     }
 
     /**
-     * Explicilty sets the server base path. To be used when your entry script path differs from your entry URLs.
+     * Explicitly sets the server base path. To be used when your entry script path differs from your entry URLs.
      * @see https://github.com/bramus/router/issues/82#issuecomment-466956078
      *
      * @param string
