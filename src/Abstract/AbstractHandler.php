@@ -1,10 +1,10 @@
 <?php
 
-namespace CommandString\Router\Interfaces;
+namespace CommandString\Router\Abstract;
 
 use Psr\Http\Message\ResponseInterface;
 
-abstract class HandlerInterface {
+abstract class AbstractHandler {
     abstract public function handle(ResponseInterface $response): ResponseInterface;
 
     final public static function new(): self

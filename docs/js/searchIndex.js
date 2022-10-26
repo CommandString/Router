@@ -1,21 +1,6 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\CommandString\\Router\\Interfaces\\HandlerInterface",
-            "name": "HandlerInterface",
-            "summary": "",
-            "url": "classes/CommandString-Router-Interfaces-HandlerInterface.html"
-        },                {
-            "fqsen": "\\CommandString\\Router\\Interfaces\\HandlerInterface\u003A\u003Ahandle\u0028\u0029",
-            "name": "handle",
-            "summary": "",
-            "url": "classes/CommandString-Router-Interfaces-HandlerInterface.html#method_handle"
-        },                {
-            "fqsen": "\\CommandString\\Router\\Interfaces\\HandlerInterface\u003A\u003Anew\u0028\u0029",
-            "name": "new",
-            "summary": "",
-            "url": "classes/CommandString-Router-Interfaces-HandlerInterface.html#method_new"
-        },                {
             "fqsen": "\\CommandString\\Router\\Router",
             "name": "Router",
             "summary": "Class\u0020Router.",
@@ -90,6 +75,11 @@ Search.appendIndex(
             "name": "run",
             "summary": "Execute\u0020the\u0020router\u003A\u0020Loop\u0020all\u0020defined\u0020before\u0020middleware\u0027s\u0020and\u0020routes,\u0020and\u0020execute\u0020the\u0020handling\u0020function\u0020if\u0020a\u0020match\u0020was\u0020found.",
             "url": "classes/CommandString-Router-Router.html#method_run"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Router\u003A\u003Aemit\u0028\u0029",
+            "name": "emit",
+            "summary": "",
+            "url": "classes/CommandString-Router-Router.html#method_emit"
         },                {
             "fqsen": "\\CommandString\\Router\\Router\u003A\u003Aset404\u0028\u0029",
             "name": "set404",
@@ -166,15 +156,65 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/CommandString-Router-Router.html#property_serverBasePath"
         },                {
+            "fqsen": "\\CommandString\\Router\\Abstract\\AbstractHandler",
+            "name": "AbstractHandler",
+            "summary": "",
+            "url": "classes/CommandString-Router-Abstract-AbstractHandler.html"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Abstract\\AbstractHandler\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "",
+            "url": "classes/CommandString-Router-Abstract-AbstractHandler.html#method_handle"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Abstract\\AbstractHandler\u003A\u003Anew\u0028\u0029",
+            "name": "new",
+            "summary": "",
+            "url": "classes/CommandString-Router-Abstract-AbstractHandler.html#method_new"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment",
+            "name": "Environment",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#method___construct"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A__get\u0028\u0029",
+            "name": "__get",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#method___get"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A__set\u0028\u0029",
+            "name": "__set",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#method___set"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#method_get"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A\u0024env",
+            "name": "env",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#property_env"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#property_instance"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\CommandString\\Router\\Interfaces",
-            "name": "Interfaces",
+            "fqsen": "\\CommandString\\Router\\Abstract",
+            "name": "Abstract",
             "summary": "",
-            "url": "namespaces/commandstring-router-interfaces.html"
+            "url": "namespaces/commandstring-router-abstract.html"
         },                {
             "fqsen": "\\CommandString\\Router",
             "name": "Router",

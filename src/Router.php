@@ -2,9 +2,10 @@
 
 namespace CommandString\Router;
 
-use CommandString\Router\Interfaces\HandlerInterface;
+use CommandString\Router\Abstract\AbstractHandler;
 use HttpSoft\Emitter\SapiEmitter;
 use HttpSoft\Message\Response;
+use HttpSoft\Response\RedirectResponse;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -52,9 +53,9 @@ class Router
      *
      * @param string                    $methods Allowed methods, | delimited
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function before(string $methods, string $pattern, callable|HandlerInterface $fn): void
+    public function before(string $methods, string $pattern, callable|AbstractHandler $fn): void
     {
         $pattern = $this->baseRoute . '/' . trim($pattern, '/');
         $pattern = $this->baseRoute ? rtrim($pattern, '/') : $pattern;
@@ -72,9 +73,9 @@ class Router
      *
      * @param string                    $methods Allowed methods, | delimited
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function after(string $methods, string $pattern, callable|HandlerInterface $fn): void
+    public function after(string $methods, string $pattern, callable|AbstractHandler $fn): void
     {
         $pattern = $this->baseRoute . '/' . trim($pattern, '/');
         $pattern = $this->baseRoute ? rtrim($pattern, '/') : $pattern;
@@ -92,9 +93,9 @@ class Router
      *
      * @param string                    $methods Allowed methods, | delimited
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function match(string $methods, string $pattern, HandlerInterface|callable $fn): void
+    public function match(string $methods, string $pattern, AbstractHandler|callable $fn): void
     {
         $pattern = $this->baseRoute . '/' . trim($pattern, '/');
         $pattern = $this->baseRoute ? rtrim($pattern, '/') : $pattern;
@@ -111,9 +112,9 @@ class Router
      * Shorthand for a route accessed using any method.
      *
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function all(string $pattern, HandlerInterface|callable $fn): void
+    public function all(string $pattern, AbstractHandler|callable $fn): void
     {
         $this->match('GET|POST|PUT|DELETE|OPTIONS|PATCH|HEAD', $pattern, $fn);
     }
@@ -122,9 +123,9 @@ class Router
      * Shorthand for a route accessed using GET.
      *
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function get(string $pattern, HandlerInterface|callable $fn): void
+    public function get(string $pattern, AbstractHandler|callable $fn): void
     {
         $this->match('GET', $pattern, $fn);
     }
@@ -133,9 +134,9 @@ class Router
      * Shorthand for a route accessed using POST.
      *
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function post(string $pattern, HandlerInterface|callable $fn): void
+    public function post(string $pattern, AbstractHandler|callable $fn): void
     {
         $this->match('POST', $pattern, $fn);
     }
@@ -144,9 +145,9 @@ class Router
      * Shorthand for a route accessed using PATCH.
      *
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function patch(string $pattern, HandlerInterface|callable $fn): void
+    public function patch(string $pattern, AbstractHandler|callable $fn): void
     {
         $this->match('PATCH', $pattern, $fn);
     }
@@ -155,9 +156,9 @@ class Router
      * Shorthand for a route accessed using DELETE.
      *
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function delete(string $pattern, HandlerInterface|callable $fn): void
+    public function delete(string $pattern, AbstractHandler|callable $fn): void
     {
         $this->match('DELETE', $pattern, $fn);
     }
@@ -166,9 +167,9 @@ class Router
      * Shorthand for a route accessed using PUT.
      *
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function put(string $pattern, HandlerInterface|callable $fn): void
+    public function put(string $pattern, AbstractHandler|callable $fn): void
     {
         $this->match('PUT', $pattern, $fn);
     }
@@ -177,9 +178,9 @@ class Router
      * Shorthand for a route accessed using OPTIONS.
      *
      * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param AbstractHandler|callable $fn      The handling function to be executed
      */
-    public function options(string $pattern, HandlerInterface|callable $fn): void
+    public function options(string $pattern, AbstractHandler|callable $fn): void
     {
         $this->match('OPTIONS', $pattern, $fn);
     }
@@ -307,20 +308,25 @@ class Router
         if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
             ob_end_clean();
         } else {
-            (new SapiEmitter())->emit($this->response);
+            $this->emit();
         }
 
         // Return true if a route was handled, false otherwise
         return $numHandled !== 0;
     }
 
+    private function emit(): void
+    {
+        (new SapiEmitter())->emit($this->response);
+    }
+
     /**
      * Set the 404 handling function.
      *
      * @param string $match_fn The function to be executed
-     * @param HandlerInterface|callable $fn The function to be executed
+     * @param AbstractHandler|callable $fn The function to be executed
      */
-    public function set404(string $match_fn, HandlerInterface|callable $fn = null): void
+    public function set404(string $match_fn, AbstractHandler|callable $fn = null): void
     {
       if (!is_null($fn)) {
         $this->notFoundCallback[$match_fn] = $fn;
@@ -471,6 +477,10 @@ class Router
         }
 
         $this->response = $response;
+
+        if ($this->response instanceof RedirectResponse) {
+            $this->emit();
+        }
     }
 
     /**

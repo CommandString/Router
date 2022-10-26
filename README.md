@@ -105,10 +105,10 @@ Nesting of subroutes is possible, just define a second `$router->mount()` in the
 
 ## Class Handlers
 
-Extend the `abstract HandlerInterface class`
+Extend the `\CommandString\Router\Abstract\AbstractHandler class`
 ```php
 // User.php
-class User extends HandlerInterface {
+class User extends AbstractHandler {
     public function handle($response, $username = null): ResponseInterface
     {
         $response->getBody()->write("$username");
