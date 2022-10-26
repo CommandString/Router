@@ -1,6 +1,8 @@
 # CommandString/Router #
 A PHP router - THIS IS STILL IN DEVELOPMENT DO NOT USE IN PRODUCTION...YET
 
+(Class Reference)[https://docs.cmdstr.dev/router]
+
 ## Features
 * Supports `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`, `PATCH` and `HEAD` request methods
 * Routing shorthands:
