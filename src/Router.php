@@ -387,8 +387,8 @@ class Router
     * Replace all curly braces matches {} into word patterns (like Laravel)
     * Checks if there is a routing match
     *
-    * @param string $pattern
-    * @param string $uri
+    * @param string     $pattern
+    * @param string     $uri
     * @param array|null $matches
     *
     * @return bool -> is match yes/no
@@ -461,13 +461,13 @@ class Router
     private function invoke($fn, $params = array())
     {
         if (is_callable($fn)) {
-            $response = call_user_func($fn, $this->response, $params);
+            $response = call_user_func_array($fn, [$this->response, ...$params]);
 
             if (!$response instanceof ResponseInterface) {
                 throw new \RuntimeException("Your method handler must return an instance of ResponseInterface.");
             }
         } else {
-            $response = $fn->handle($this->response, $params);
+            $response = $fn->handle($this->response, ...$params);
         }
 
         $this->response = $response;
