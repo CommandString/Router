@@ -1,5 +1,5 @@
 # CommandString/Router #
-A PHP router
+A PHP router - THIS IS STILL IN DEVELOPMENT DO NOT USE IN PRODUCTION...YET
 
 ## Features
 * Supports `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`, `PATCH` and `HEAD` request methods
