@@ -1,7 +1,5 @@
 # CommandString/Router #
-A PHP router - THIS IS STILL IN DEVELOPMENT DO NOT USE IN PRODUCTION...YET
-
-[Class Reference](https://docs.cmdstr.dev/router)
+A PHP router
 
 ## Features
 * Supports `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`, `PATCH` and `HEAD` request methods
@@ -105,10 +103,10 @@ Nesting of subroutes is possible, just define a second `$router->mount()` in the
 
 ## Class Handlers
 
-Extend the `\CommandString\Router\Abstract\AbstractHandler class`
+Extend the `abstract HandlerInterface class`
 ```php
 // User.php
-class User extends AbstractHandler {
+class User extends HandlerInterface {
     public function handle($response, $username = null): ResponseInterface
     {
         $response->getBody()->write("$username");
@@ -161,10 +159,32 @@ $router->set404("pattern", function ($response) {
 ```
 Note: Middleware **WILL NOT** work if the page 404's
 
-## Twig Template
+## Environment 
 ```php
-// TO BE DONE //
+$env = new \CommandString\Router\Environment("/path/to/environment.json"); // default: ./env.json
+
+// Creating environment variables in the script
+\CommandString\Router\Environment::get()->variable = "value";
+
+echo \CommandString\Router\Environment::get()->variable; // output: value
+
+\CommandString\Router\Environment::get()->variable = "value2";
+
+echo \CommandString\Router\Environment::get()->variable; // output: value
+// you cannot overwrite already existing environment variables
+```
+
+## Twig Template
+I recommend reading the [Twig documentation](https://twig.symfony.com/doc/3.x/)
+```php
+use \CommandString\Router\Environment as Env;
+
+$env = new Env();
+
+$env->twig =  new  \Twig\Environment(new  \Twig\Loader\FilesystemLoader("/path/to/views"), [
+	"cache"  =>  "/path/to/cache"
+]);
 ```
 
 ## Acknowledgements
-`\CommandString\Router\Router` is a fork of [Bramus\Router](https://github.com/bramus/router/blob/master/src/Bramus/Router/Router.php) with some additions. Also [HttpSoft](https://httpsoft.org/) made it so I didn't have to implement PSR-7 myself.
+`\CommandString\Router\Router` is a fork of [Bramus\Router](https://github.com/bramus/router/blob/master/src/Bramus/Router/Router.php). Very glad I found [HttpSoft](https://httpsoft.org/) because I didn't want to try and implement PSR-7 myself.
