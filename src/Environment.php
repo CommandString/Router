@@ -3,21 +3,26 @@
 namespace CommandString\Router;
 
 use RuntimeException;
+use stdClass;
 
 final class Environment {
     private object $env;
     private static self $instance;
 
-    public function __construct(string $env_location = "./env.json")
+    public function __construct(string|bool $env_location = "./env.json")
     {
-        if (!file_exists($env_location)) {
-            throw new RuntimeException("$env_location is not a real file!");
-        }
+        if ($env_location === false) {
+            $this->env = new stdClass();
+        } else {
+            if (!file_exists($env_location)) {
+                throw new RuntimeException("$env_location is not a real file!");
+            }
 
-        try {
-            $this->env = json_decode(file_get_contents($env_location));
-        } catch (\TypeError $e) {
-            throw new RuntimeException("$env_location is not a valid json file!");
+            try {
+                $this->env = json_decode(file_get_contents($env_location));
+            } catch (\TypeError $e) {
+                throw new RuntimeException("$env_location is not a valid json file!");
+            }
         }
 
         self::$instance = $this;
