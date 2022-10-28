@@ -2,10 +2,11 @@
 
 namespace CommandString\Router;
 
-use CommandString\Router\Interfaces\HandlerInterface;
 use HttpSoft\Emitter\SapiEmitter;
 use HttpSoft\Message\Response;
+use HttpSoft\Response\RedirectResponse;
 use Psr\Http\Message\ResponseInterface;
+use ReflectionMethod;
 
 /**
  * Class Router.
@@ -23,12 +24,12 @@ class Router
     private array $routes = array();
 
     /**
-     * @var array The route patterns and their handling functions
+     * @var array The after middle route patterns and their handling functions
      */
     private array $afterRoutes = array();
 
     /**
-     * @var array [object|callable] The function to be executed when no route has been matched
+     * @var array [string|callable] The function to be executed when no route has been matched
      */
     protected array $notFoundCallback = [];
 
@@ -48,13 +49,18 @@ class Router
     private string $serverBasePath = '';
 
     /**
+     * @var string Default Controllers Namespace
+     */
+    private $namespace = '';
+
+    /**
      * Store a before middleware route and a handling function to be executed when accessed using one of the specified methods.
      *
-     * @param string                    $methods Allowed methods, | delimited
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $methods Allowed methods, | delimited
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function before(string $methods, string $pattern, callable|HandlerInterface $fn): void
+    public function before(string $methods, string $pattern, callable|string $fn): void
     {
         $pattern = $this->baseRoute . '/' . trim($pattern, '/');
         $pattern = $this->baseRoute ? rtrim($pattern, '/') : $pattern;
@@ -70,11 +76,11 @@ class Router
     /**
      * Store a after middleware route and a handling function to be executed when accessed using one of the specified methods.
      *
-     * @param string                    $methods Allowed methods, | delimited
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $methods Allowed methods, | delimited
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function after(string $methods, string $pattern, callable|HandlerInterface $fn): void
+    public function after(string $methods, string $pattern, callable|string $fn): void
     {
         $pattern = $this->baseRoute . '/' . trim($pattern, '/');
         $pattern = $this->baseRoute ? rtrim($pattern, '/') : $pattern;
@@ -88,13 +94,33 @@ class Router
     }
 
     /**
+     * Set a Default Lookup Namespace for Callable methods.
+     *
+     * @param string $namespace A given namespace
+     */
+    public function setNamespace(string $namespace)
+    {
+        $this->namespace = $namespace;
+    }
+
+    /**
+     * Get the given Namespace before.
+     *
+     * @return string The given Namespace if exists
+     */
+    public function getNamespace(): string
+    {
+        return $this->namespace;
+    }
+
+    /**
      * Store a route and a handling function to be executed when accessed using one of the specified methods.
      *
-     * @param string                    $methods Allowed methods, | delimited
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $methods Allowed methods, | delimited
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function match(string $methods, string $pattern, HandlerInterface|callable $fn): void
+    public function match(string $methods, string $pattern, string|callable $fn): void
     {
         $pattern = $this->baseRoute . '/' . trim($pattern, '/');
         $pattern = $this->baseRoute ? rtrim($pattern, '/') : $pattern;
@@ -110,10 +136,10 @@ class Router
     /**
      * Shorthand for a route accessed using any method.
      *
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function all(string $pattern, HandlerInterface|callable $fn): void
+    public function all(string $pattern, string|callable $fn): void
     {
         $this->match('GET|POST|PUT|DELETE|OPTIONS|PATCH|HEAD', $pattern, $fn);
     }
@@ -121,10 +147,10 @@ class Router
     /**
      * Shorthand for a route accessed using GET.
      *
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function get(string $pattern, HandlerInterface|callable $fn): void
+    public function get(string $pattern, string|callable $fn): void
     {
         $this->match('GET', $pattern, $fn);
     }
@@ -132,10 +158,10 @@ class Router
     /**
      * Shorthand for a route accessed using POST.
      *
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function post(string $pattern, HandlerInterface|callable $fn): void
+    public function post(string $pattern, string|callable $fn): void
     {
         $this->match('POST', $pattern, $fn);
     }
@@ -143,10 +169,10 @@ class Router
     /**
      * Shorthand for a route accessed using PATCH.
      *
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function patch(string $pattern, HandlerInterface|callable $fn): void
+    public function patch(string $pattern, string|callable $fn): void
     {
         $this->match('PATCH', $pattern, $fn);
     }
@@ -154,10 +180,10 @@ class Router
     /**
      * Shorthand for a route accessed using DELETE.
      *
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function delete(string $pattern, HandlerInterface|callable $fn): void
+    public function delete(string $pattern, string|callable $fn): void
     {
         $this->match('DELETE', $pattern, $fn);
     }
@@ -165,10 +191,10 @@ class Router
     /**
      * Shorthand for a route accessed using PUT.
      *
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function put(string $pattern, HandlerInterface|callable $fn): void
+    public function put(string $pattern, string|callable $fn): void
     {
         $this->match('PUT', $pattern, $fn);
     }
@@ -176,10 +202,10 @@ class Router
     /**
      * Shorthand for a route accessed using OPTIONS.
      *
-     * @param string                    $pattern A route pattern such as /about/system
-     * @param HandlerInterface|callable $fn      The handling function to be executed
+     * @param string            $pattern A route pattern such as /about/system
+     * @param string|callable   $fn      The handling function to be executed
      */
-    public function options(string $pattern, HandlerInterface|callable $fn): void
+    public function options(string $pattern, string|callable $fn): void
     {
         $this->match('OPTIONS', $pattern, $fn);
     }
@@ -265,11 +291,9 @@ class Router
     /**
      * Execute the router: Loop all defined before middleware's and routes, and execute the handling function if a match was found.
      *
-     * @param object|callable $callback Function to be executed after a matching route was handled (= after router middleware)
-     *
      * @return bool
      */
-    public function run(object|callable $callback = null): bool
+    public function run(): bool
     {
         // Define which method we need to handle
         $this->requestedMethod = $this->getRequestMethod();
@@ -297,30 +321,31 @@ class Router
             if (isset($this->afterRoutes[$this->requestedMethod])) {
                 $numHandled = $this->handle($this->afterRoutes[$this->requestedMethod]);
             }
-
-            if ($callback && is_callable($callback)) {
-                $callback();
-            }
         }
 
         // If it originally was a HEAD request, clean up after ourselves by emptying the output buffer
         if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
             ob_end_clean();
         } else {
-            (new SapiEmitter())->emit($this->response);
+            $this->emit();
         }
 
         // Return true if a route was handled, false otherwise
         return $numHandled !== 0;
     }
 
+    private function emit(): void
+    {
+        (new SapiEmitter())->emit($this->response);
+    }
+
     /**
      * Set the 404 handling function.
      *
      * @param string $match_fn The function to be executed
-     * @param HandlerInterface|callable $fn The function to be executed
+     * @param string|callable $fn The function to be executed
      */
-    public function set404(string $match_fn, HandlerInterface|callable $fn = null): void
+    public function set404(string $match_fn, string|callable $fn = null): void
     {
       if (!is_null($fn)) {
         $this->notFoundCallback[$match_fn] = $fn;
@@ -463,14 +488,44 @@ class Router
         if (is_callable($fn)) {
             $response = call_user_func_array($fn, [$this->response, ...$params]);
 
-            if (!$response instanceof ResponseInterface) {
-                throw new \RuntimeException("Your method handler must return an instance of ResponseInterface.");
+        } else if (stripos($fn, '@') !== false) {
+            // Explode segments of given route
+            list($controller, $method) = explode('@', $fn);
+
+            // Adjust controller class if namespace has been set
+            if ($this->getNamespace() !== '') {
+                $controller = $this->getNamespace() . '\\' . $controller;
             }
-        } else {
-            $response = $fn->handle($this->response, ...$params);
+
+            try {
+                $reflectedMethod = new ReflectionMethod($controller, $method);
+                // Make sure it's callable
+                if ($reflectedMethod->isPublic() && (!$reflectedMethod->isAbstract())) {
+                    if ($reflectedMethod->isStatic()) {
+                        forward_static_call_array(array($controller, $method), $params);
+                    } else {
+                        // Make sure we have an instance, because a non-static method must not be called statically
+                        if (\is_string($controller)) {
+                            $controller = new $controller();
+                        }
+
+                        $response = call_user_func_array(array($controller, $method), $params);
+                    }
+                }
+            } catch (\ReflectionException $reflectionException) {
+                // The controller class is not available or the class does not have the method $method
+            }
+        }
+
+        if (!$response instanceof ResponseInterface) {
+            throw new \RuntimeException("Your route handler must return an instance of ResponseInterface.");
         }
 
         $this->response = $response;
+
+        if ($this->response instanceof RedirectResponse) {
+            $this->emit();
+        }
     }
 
     /**

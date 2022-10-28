@@ -91,12 +91,12 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/commandstring.html">CommandString</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/commandstring-router.html">Router</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/commandstring-router-interfaces.html">Interfaces</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/commandstring-router-abstract.html">Abstract</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    HandlerInterface
+    AbstractHandler
 
     
             <div class="phpdocumentor-element__package">
@@ -110,7 +110,7 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Interfaces/HandlerInterface.php"><a href="files/commandstring-router-src-interfaces-handlerinterface.html"><abbr title="commandstring-router/src/Interfaces/HandlerInterface.php">HandlerInterface.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Abstract/AbstractHandler.php"><a href="files/src-abstract-abstracthandler.html"><abbr title="src/Abstract/AbstractHandler.php">AbstractHandler.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">7</span>
 
@@ -133,14 +133,14 @@
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/CommandString-Router-Interfaces-HandlerInterface.html#method_handle">handle()</a>
+    <a href="classes/CommandString-Router-Abstract-AbstractHandler.html#method_handle">handle()</a>
     <span>
                                 &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/CommandString-Router-Interfaces-HandlerInterface.html#method_new">new()</a>
+    <a href="classes/CommandString-Router-Abstract-AbstractHandler.html#method_new">new()</a>
     <span>
                                 &nbsp;: self    </span>
 </dt>
@@ -157,7 +157,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/CommandString-Router-Interfaces-HandlerInterface.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/CommandString-Router-Abstract-AbstractHandler.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -167,10 +167,10 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_handle">
         handle()
-        <a href="classes/CommandString-Router-Interfaces-HandlerInterface.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/CommandString-Router-Abstract-AbstractHandler.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Interfaces/HandlerInterface.php"><a href="files/commandstring-router-src-interfaces-handlerinterface.html"><abbr title="commandstring-router/src/Interfaces/HandlerInterface.php">HandlerInterface.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Abstract/AbstractHandler.php"><a href="files/src-abstract-abstracthandler.html"><abbr title="src/Abstract/AbstractHandler.php">AbstractHandler.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">8</span>
 
@@ -179,7 +179,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$response</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parameters</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$response</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -188,14 +188,6 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$response</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$parameters</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -215,14 +207,14 @@
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                    -static            -final        "
 >
     <h4 class="phpdocumentor-element__name" id="method_new">
         new()
-        <a href="classes/CommandString-Router-Interfaces-HandlerInterface.html#method_new" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/CommandString-Router-Abstract-AbstractHandler.html#method_new" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Interfaces/HandlerInterface.php"><a href="files/commandstring-router-src-interfaces-handlerinterface.html"><abbr title="commandstring-router/src/Interfaces/HandlerInterface.php">HandlerInterface.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Abstract/AbstractHandler.php"><a href="files/src-abstract-abstracthandler.html"><abbr title="src/Abstract/AbstractHandler.php">AbstractHandler.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">10</span>
 
@@ -231,7 +223,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">new</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+        <span class="phpdocumentor-signature__final">final</span>    <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">new</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -322,7 +314,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/CommandString-Router-Interfaces-HandlerInterface.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/CommandString-Router-Abstract-AbstractHandler.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

@@ -1,20 +1,50 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\CommandString\\Router\\Interfaces\\HandlerInterface",
+            "fqsen": "\\CommandString\\Router\\Environment",
+            "name": "Environment",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#method___construct"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A__get\u0028\u0029",
+            "name": "__get",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#method___get"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A__set\u0028\u0029",
+            "name": "__set",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#method___set"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#method_get"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A\u0024env",
+            "name": "env",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#property_env"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Environment\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "",
+            "url": "classes/CommandString-Router-Environment.html#property_instance"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Abstract\\HandlerInterface",
             "name": "HandlerInterface",
             "summary": "",
-            "url": "classes/CommandString-Router-Interfaces-HandlerInterface.html"
+            "url": "classes/CommandString-Router-Abstract-HandlerInterface.html"
         },                {
-            "fqsen": "\\CommandString\\Router\\Interfaces\\HandlerInterface\u003A\u003Ahandle\u0028\u0029",
+            "fqsen": "\\CommandString\\Router\\Abstract\\HandlerInterface\u003A\u003Ahandle\u0028\u0029",
             "name": "handle",
             "summary": "",
-            "url": "classes/CommandString-Router-Interfaces-HandlerInterface.html#method_handle"
-        },                {
-            "fqsen": "\\CommandString\\Router\\Interfaces\\HandlerInterface\u003A\u003Anew\u0028\u0029",
-            "name": "new",
-            "summary": "",
-            "url": "classes/CommandString-Router-Interfaces-HandlerInterface.html#method_new"
+            "url": "classes/CommandString-Router-Abstract-HandlerInterface.html#method_handle"
         },                {
             "fqsen": "\\CommandString\\Router\\Router",
             "name": "Router",
@@ -30,6 +60,16 @@ Search.appendIndex(
             "name": "after",
             "summary": "Store\u0020a\u0020after\u0020middleware\u0020route\u0020and\u0020a\u0020handling\u0020function\u0020to\u0020be\u0020executed\u0020when\u0020accessed\u0020using\u0020one\u0020of\u0020the\u0020specified\u0020methods.",
             "url": "classes/CommandString-Router-Router.html#method_after"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Router\u003A\u003AsetNamespace\u0028\u0029",
+            "name": "setNamespace",
+            "summary": "Set\u0020a\u0020Default\u0020Lookup\u0020Namespace\u0020for\u0020Callable\u0020methods.",
+            "url": "classes/CommandString-Router-Router.html#method_setNamespace"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Router\u003A\u003AgetNamespace\u0028\u0029",
+            "name": "getNamespace",
+            "summary": "Get\u0020the\u0020given\u0020Namespace\u0020before.",
+            "url": "classes/CommandString-Router-Router.html#method_getNamespace"
         },                {
             "fqsen": "\\CommandString\\Router\\Router\u003A\u003Amatch\u0028\u0029",
             "name": "match",
@@ -90,6 +130,11 @@ Search.appendIndex(
             "name": "run",
             "summary": "Execute\u0020the\u0020router\u003A\u0020Loop\u0020all\u0020defined\u0020before\u0020middleware\u0027s\u0020and\u0020routes,\u0020and\u0020execute\u0020the\u0020handling\u0020function\u0020if\u0020a\u0020match\u0020was\u0020found.",
             "url": "classes/CommandString-Router-Router.html#method_run"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Router\u003A\u003Aemit\u0028\u0029",
+            "name": "emit",
+            "summary": "",
+            "url": "classes/CommandString-Router-Router.html#method_emit"
         },                {
             "fqsen": "\\CommandString\\Router\\Router\u003A\u003Aset404\u0028\u0029",
             "name": "set404",
@@ -166,15 +211,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/CommandString-Router-Router.html#property_serverBasePath"
         },                {
+            "fqsen": "\\CommandString\\Router\\Router\u003A\u003A\u0024namespace",
+            "name": "namespace",
+            "summary": "",
+            "url": "classes/CommandString-Router-Router.html#property_namespace"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
-        },                {
-            "fqsen": "\\CommandString\\Router\\Interfaces",
-            "name": "Interfaces",
-            "summary": "",
-            "url": "namespaces/commandstring-router-interfaces.html"
         },                {
             "fqsen": "\\CommandString\\Router",
             "name": "Router",
@@ -185,5 +230,10 @@ Search.appendIndex(
             "name": "CommandString",
             "summary": "",
             "url": "namespaces/commandstring.html"
+        },                {
+            "fqsen": "\\CommandString\\Router\\Abstract",
+            "name": "Abstract",
+            "summary": "",
+            "url": "namespaces/commandstring-router-abstract.html"
         }            ]
 );

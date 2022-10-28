@@ -109,9 +109,9 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -156,6 +156,13 @@
     <a href="classes/CommandString-Router-Router.html#property_beforeRoutes">$beforeRoutes</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/CommandString-Router-Router.html#property_namespace">$namespace</a>
+    <span>
+                        &nbsp;: string            </span>
 </dt>
 <dd></dd>
 
@@ -228,6 +235,13 @@
                                 &nbsp;: string    </span>
 </dt>
 <dd>Define the current relative URI.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/CommandString-Router-Router.html#method_getNamespace">getNamespace()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Get the given Namespace before.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/CommandString-Router-Router.html#method_getRequestHeaders">getRequestHeaders()</a>
@@ -307,11 +321,25 @@
 <dd>Explicitly sets the server base path. To be used when your entry script path differs from your entry URLs.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/CommandString-Router-Router.html#method_setNamespace">setNamespace()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>Set a Default Lookup Namespace for Callable methods.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/CommandString-Router-Router.html#method_trigger404">trigger404()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Triggers 404 response</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/CommandString-Router-Router.html#method_emit">emit()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/CommandString-Router-Router.html#method_handle">handle()</a>
@@ -361,9 +389,9 @@ Checks if there is a routing match</dd>
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -375,7 +403,7 @@ Checks if there is a routing match</dd>
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
-        <section class="phpdocumentor-description"><p>[object|callable] The function to be executed when no route has been matched</p>
+        <section class="phpdocumentor-description"><p>[string|callable] The function to be executed when no route has been matched</p>
 </section>
 
     
@@ -395,9 +423,9 @@ Checks if there is a routing match</dd>
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -409,7 +437,7 @@ Checks if there is a routing match</dd>
      = <span class="phpdocumentor-signature__default-value">array()</span></code>
 
     
-        <section class="phpdocumentor-description"><p>The route patterns and their handling functions</p>
+        <section class="phpdocumentor-description"><p>The after middle route patterns and their handling functions</p>
 </section>
 
     
@@ -429,9 +457,9 @@ Checks if there is a routing match</dd>
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -463,9 +491,9 @@ Checks if there is a routing match</dd>
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -490,6 +518,40 @@ Checks if there is a routing match</dd>
             -private
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_namespace">
+        $namespace
+        <a href="classes/CommandString-Router-Router.html#property_namespace" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">54</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$namespace</span>
+     = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>Default Controllers Namespace</p>
+</section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_requestedMethod">
         $requestedMethod
         <a href="classes/CommandString-Router-Router.html#property_requestedMethod" class="headerlink"><i class="fas fa-link"></i></a>
@@ -497,9 +559,9 @@ Checks if there is a routing match</dd>
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -531,9 +593,9 @@ Checks if there is a routing match</dd>
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
@@ -565,9 +627,9 @@ Checks if there is a routing match</dd>
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
@@ -603,9 +665,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_after" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -613,7 +675,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">after</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$methods</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">after</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$methods</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -638,7 +700,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -666,9 +728,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_all" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">116</span>
+    <span class="phpdocumentor-element-found-in__line">142</span>
 
     </aside>
 
@@ -676,7 +738,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">all</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">all</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -692,7 +754,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -720,9 +782,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_before" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -730,7 +792,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">before</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$methods</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">before</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$methods</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -755,7 +817,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -783,9 +845,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_delete" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">160</span>
+    <span class="phpdocumentor-element-found-in__line">186</span>
 
     </aside>
 
@@ -793,7 +855,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">delete</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">delete</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -809,7 +871,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -837,9 +899,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">153</span>
 
     </aside>
 
@@ -847,7 +909,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -863,7 +925,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -891,9 +953,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_getBasePath" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">500</span>
+    <span class="phpdocumentor-element-found-in__line">555</span>
 
     </aside>
 
@@ -924,9 +986,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_getCurrentUri" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">481</span>
+    <span class="phpdocumentor-element-found-in__line">536</span>
 
     </aside>
 
@@ -952,14 +1014,49 @@ Checks if there is a routing match</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getNamespace">
+        getNamespace()
+        <a href="classes/CommandString-Router-Router.html#method_getNamespace" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">111</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the given Namespace before.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getNamespace</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The given Namespace if exists</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getRequestHeaders">
         getRequestHeaders()
         <a href="classes/CommandString-Router-Router.html#method_getRequestHeaders" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">213</span>
+    <span class="phpdocumentor-element-found-in__line">239</span>
 
     </aside>
 
@@ -992,9 +1089,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_getRequestMethod" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">242</span>
+    <span class="phpdocumentor-element-found-in__line">268</span>
 
     </aside>
 
@@ -1027,9 +1124,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_match" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">123</span>
 
     </aside>
 
@@ -1037,7 +1134,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">match</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$methods</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">match</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$methods</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1062,7 +1159,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -1090,9 +1187,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_mount" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">193</span>
+    <span class="phpdocumentor-element-found-in__line">219</span>
 
     </aside>
 
@@ -1144,9 +1241,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_options" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">182</span>
+    <span class="phpdocumentor-element-found-in__line">208</span>
 
     </aside>
 
@@ -1154,7 +1251,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">options</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">options</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1170,7 +1267,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -1198,9 +1295,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_patch" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">149</span>
+    <span class="phpdocumentor-element-found-in__line">175</span>
 
     </aside>
 
@@ -1208,7 +1305,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">patch</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">patch</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1224,7 +1321,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -1252,9 +1349,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_post" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">164</span>
 
     </aside>
 
@@ -1262,7 +1359,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">post</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">post</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1278,7 +1375,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -1306,9 +1403,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_put" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">171</span>
+    <span class="phpdocumentor-element-found-in__line">197</span>
 
     </aside>
 
@@ -1316,7 +1413,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">put</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">put</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1332,7 +1429,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The handling function to be executed</p>
@@ -1360,9 +1457,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_run" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">272</span>
+    <span class="phpdocumentor-element-found-in__line">296</span>
 
     </aside>
 
@@ -1370,22 +1467,10 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">run</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">object|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">run</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$callback</span>
-                : <span class="phpdocumentor-signature__argument__return-type">object|callable</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Function to be executed after a matching route was handled (= after router middleware)</p>
-</section>
-
-            </dd>
-            </dl>
-
+    
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -1405,9 +1490,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_set404" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">323</span>
+    <span class="phpdocumentor-element-found-in__line">348</span>
 
     </aside>
 
@@ -1415,7 +1500,7 @@ Checks if there is a routing match</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">set404</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$match_fn</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">set404</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$match_fn</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1431,7 +1516,7 @@ Checks if there is a routing match</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$fn</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/CommandString-Router-Interfaces-HandlerInterface.html"><abbr title="\CommandString\Router\Interfaces\HandlerInterface">HandlerInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|callable</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The function to be executed</p>
@@ -1459,9 +1544,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_setBasePath" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">516</span>
+    <span class="phpdocumentor-element-found-in__line">571</span>
 
     </aside>
 
@@ -1512,14 +1597,59 @@ Checks if there is a routing match</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setNamespace">
+        setNamespace()
+        <a href="classes/CommandString-Router-Router.html#method_setNamespace" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">101</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set a Default Lookup Namespace for Callable methods.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setNamespace</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$namespace</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$namespace</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>A given namespace</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_trigger404">
         trigger404()
         <a href="classes/CommandString-Router-Router.html#method_trigger404" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">337</span>
+    <span class="phpdocumentor-element-found-in__line">362</span>
 
     </aside>
 
@@ -1556,14 +1686,47 @@ Checks if there is a routing match</dd>
             -private
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_emit">
+        emit()
+        <a href="classes/CommandString-Router-Router.html#method_emit" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">337</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">emit</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_handle">
         handle()
         <a href="classes/CommandString-Router-Router.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">413</span>
+    <span class="phpdocumentor-element-found-in__line">438</span>
 
     </aside>
 
@@ -1617,9 +1780,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_invoke" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">461</span>
+    <span class="phpdocumentor-element-found-in__line">486</span>
 
     </aside>
 
@@ -1669,9 +1832,9 @@ Checks if there is a routing match</dd>
         <a href="classes/CommandString-Router-Router.html#method_patternMatches" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="commandstring-router/src/Router.php"><a href="files/commandstring-router-src-router.html"><abbr title="commandstring-router/src/Router.php">Router.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Router.php"><a href="files/src-router.html"><abbr title="src/Router.php">Router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">396</span>
+    <span class="phpdocumentor-element-found-in__line">421</span>
 
     </aside>
 
