@@ -9,7 +9,6 @@
     },
     "require": {
         "httpsoft/http-response": "^1.0",
-        "httpsoft/http-emitter": "^1.0",
-        "twig/twig": "^3.4"
+        "httpsoft/http-emitter": "^1.0"
     }
 }
