@@ -1,11 +1,11 @@
 
 # commandstring/router
 
- [![Source](http://img.shields.io/badge/source-commandstring/router-blue.svg?style=flat-square)](https://github.com/commandstring/router) [](https://packagist.org/packages/commandstring/router/stats) [![License](https://img.shields.io/packagist/l/commandstring/commandstring-router.svg?style=flat-square)](https://github.com/commandstring/router/blob/master/LICENSE)
+ [![Source](http://img.shields.io/badge/source-commandstring/router-blue.svg?style=flat-square)](https://github.com/commandstring/router) [](https://packagist.org/packages/commandstring/router/stats) [![License](https://img.shields.io/github/license/commandstring/router?style=flat-square)](https://github.com/commandstring/router/blob/master/LICENSE)
 
 A lightweight and simple object oriented PHP Router.
 
-## Features
+## Table of Contents
 
 - Supports `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`, `PATCH` and `HEAD` request methods
 - [Routing shorthands such as `get()`, `post()`, `put()`, …](#routing-shorthands)
@@ -18,29 +18,25 @@ A lightweight and simple object oriented PHP Router.
 - [Custom 404 handling](#custom-404)
 - [Before Route Middlewares](#before-route-middlewares)
 - [Before Router Middlewares / Before App Middlewares](#before-router-middlewares)
-- [After Router Middleware / After App Middleware (Finish Callback)](#after-router-middleware--run-callback)
+- [After Router Middlewares](#after-router-middlewares)
 - [Works fine in subfolders](#subfolder-support)
+- [Using Template Libraries](#template-library-integration)
+- [Responding to requests](#responding-to-requests)
 
 
 
 ## Prerequisites/Requirements
 
-- PHP 5.3 or greater
+- PHP 8.1 or greater
+- Composer
 - [URL Rewriting](https://gist.github.com/bramus/5332525)
 
 
 
 ## Installation
-
-Installation is possible using Composer
-
 ```
 composer require commandstring/router
 ```
-
-## Demo
-
-A demo is included in the `demo` subfolder. Serve it using your favorite web server, or using PHP 8.1's built-in server by executing `php -S localhost:8000 index.php` on the shell. A `.htaccess` for use with Apache is included.
 
 ## Usage
 
@@ -48,10 +44,10 @@ Create an instance of `\CommandString\Router\Router`, define some routes onto it
 
 ```php
 // Require composer autoloader
-require __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 // Create Router instance
-$router = new \Bramus\Router\Router();
+$router = new \CommandString\Router\Router();
 
 // Define routes
 // ...
@@ -76,7 +72,6 @@ When a route matches against the current URL (e.g. `$_SERVER['REQUEST_URI']`), t
 ### Routing Shorthands
 
 Shorthands for single request methods are provided:
-
 ```php
 $router->get('pattern', function() { /* ... */ });
 $router->post('pattern', function() { /* ... */ });
@@ -94,7 +89,7 @@ $router->all('pattern', function() { /* ... */ });
 
 Note: Routes must be hooked before `$router->run();` is being called.
 
-Note: There is no shorthand for `match()` as `commandstring/router` will internally re-route such requrests to their equivalent `GET` request, in order to comply with RFC2616 _(see [note](#a-note-on-making-head-requests))_.
+Note: There is no shorthand for `match()` as `commandstring/router` will internally re-route such requests to their equivalent `GET` request, in order to comply with RFC2616 _(see [note](#a-note-on-making-head-requests))_.
 
 ### Route Patterns
 
@@ -225,6 +220,7 @@ $router->get(
 		}
 		
 		$res->getBody()->write('Blogpost ' . htmlentities($slug) . ' detail');
+		return $res;
 	}
 );
 ```
@@ -234,7 +230,6 @@ The code snippet above responds to the URLs `/blog`, `/blog/year`, `/blog/year/m
 Note: With optional parameters it is important that the leading `/` of the subpatterns is put inside the subpattern itself. Don't forget to set default values for the optional parameters.
 
 The code snipped above unfortunately also responds to URLs like `/blog/foo` and states that the overview needs to be shown - which is incorrect. Optional subpatterns can be made successive by extending the parenthesized subpatterns so that they contain the other optional subpatterns: The pattern should resemble `/blog(/year(/month(/day(/slug))))` instead of the previous `/blog(/year)(/month)(/day)(/slug)`:
-
 ```php
 $router->get('/blog(/\d+(/\d+(/\d+(/[a-z0-9_-]+)?)?)?)?', function($year = null, $month = null, $day = null, $slug = null) {
     // ...
@@ -251,24 +246,23 @@ $router->get('/blog(/\d{4}(/\d{2}(/\d{2}(/[a-z0-9_-]+)?)?)?)?', function($year =
 });
 ```
 
-
 ### Subrouting / Mounting Routes
 
 Use `$router->mount($baseroute, $fn)` to mount a collection of routes onto a subroute pattern. The subroute pattern is prefixed onto all following routes defined in the scope. e.g. Mounting a callback `$fn` onto `/movies` will prefix `/movies` onto all following routes.
 
 ```php
 $router->mount('/movies', function() use ($router) {
+	// will result in '/movies/'
+	$router->get('/', function($res) {
+		$res->getBody()->write("Movies overview");
+		return $res;
+	});
 
-    // will result in '/movies/'
-    $router->get('/', function() {
-        echo 'movies overview';
-    });
-
-    // will result in '/movies/id'
-    $router->get('/(\d+)', function($id) {
-        echo 'movie id ' . htmlentities($id);
-    });
-
+	// will result in '/movies/id'
+	$router->get('/(\d+)', function($res) {
+		$res->getBody()->write('movie id ' . htmlentities($id));
+		return $res;
+	});
 });
 ```
 
@@ -276,9 +270,7 @@ Nesting of subroutes is possible, just define a second `$router->mount()` in the
 
 
 ### `Class@Method` calls
-
 We can route to the class action like so:
-
 ```php
 $router->get('/(\d+)', '\App\Controllers\User@showProfile');
 ```
@@ -300,47 +292,27 @@ $router->get('/cars/(\d+)', 'Car@showProfile');
 The default 404 handler sets a 404 status code and exits. You can override this default 404 handler by using `$router->set404(callable);`
 
 ```php
-$router->set404(function() {
-    header('HTTP/1.1 404 Not Found');
-    // ... do something special here
+$router->set404("/", function(ResponseInterface $res) {
+	$res->withStatus(404);
+	$res->getBody()->write("HTTP STATUS CODE: 404<br>URI: {$_SERVER['REQUEST_URI']}<br>METHOD: {$_SERVER['REQUEST_METHOD']}");
+	return $res;
 });
 ```
 
 You can also define multiple custom routes e.x. you want to define an `/api` route, you can print a custom 404 page:
 
 ```php
-$router->set404('/api(/.*)?', function() {
-    header('HTTP/1.1 404 Not Found');
-    header('Content-Type: application/json');
-
-    $jsonArray = array();
-    $jsonArray['status'] = "404";
-    $jsonArray['status_text'] = "route not defined";
-
-    echo json_encode($jsonArray);
+$router->set404("/api(/.*)?", function() {
+	return new JsonResponse(["status" => 404, "status_text" => "Endpoint not defined"], 404);
 });
 ```
 
-Also supported are `Class@Method` callables:
-
+`Class@Method` callables are also supported:
 ```php
 $router->set404('\App\Controllers\Error@notFound');
 ```
 
 The 404 handler will be executed when no route pattern was matched to the current URL.
-
-💡 You can also manually trigger the 404 handler by calling `$router->trigger404()`
-
-```php
-$router->get('/([a-z0-9-]+)', function($id) use ($router) {
-    if (!Posts::exists($id)) {
-        $router->trigger404();
-        return;
-    }
-
-    // …
-});
-```
 
 
 ### Before Route Middlewares
@@ -350,11 +322,10 @@ $router->get('/([a-z0-9-]+)', function($id) use ($router) {
 Like route handling functions, you hook a handling function to a combination of one or more HTTP request methods and a specific route pattern.
 
 ```php
-$router->before('GET|POST', '/admin/.*', function() {
-    if (!isset($_SESSION['user'])) {
-        header('location: /auth/login');
-        exit();
-    }
+$router->before("POST", "/api(/*.)?", function() {
+	if (!isset($_POST["api_key"])) {
+		return new JsonResponse(["error_message", "You must provide an API key!"], 403);
+	}
 });
 ```
 
@@ -367,10 +338,9 @@ Before route middlewares are route specific. Using a general route pattern (viz.
 
 ```php
 $router->before('GET', '/.*', function() {
-    // ... this will always be executed
+	// ... this will always be executed
 });
 ```
-
 
 ### After Route Middlewares
 
@@ -379,11 +349,10 @@ $router->before('GET', '/.*', function() {
 Like route handling functions, you hook a handling function to a combination of one or more HTTP request methods and a specific route pattern.
 
 ```php
-$router->after('GET|POST', '/admin/.*', function() {
-    if (!isset($_SESSION['user'])) {
-        header('location: /auth/login');
-        exit();
-    }
+$router->before('GET', '/', function() {
+	if (!isset($_SESSION['user'])) {
+		return new RedirectResponse("/login");
+	}
 });
 ```
 
@@ -395,7 +364,7 @@ After route middlewares are route specific. Using a general route pattern (viz. 
 
 ```php
 $router->after('GET', '/.*', function() {
-    // ... this will always be executed
+	// ... this will always be executed
 });
 ```
 
@@ -411,8 +380,15 @@ Out-of-the box `commandstring/router` will run in any (sub)folder you place it i
 Say you have a server hosting the domain `www.example.org` using `public_html/` as its document root, with this little _entry script_ `index.php`:
 
 ```php
-$router->get('/', function() { echo 'Index'; });
-$router->get('/hello', function() { echo 'Hello!'; });
+$router->get('/', function($res) {
+	$res->getBody()->write("Hello World!");
+	return $res;
+});
+
+$router->get('/hello', function() {
+	$res->getBody()->write("Hello World!");
+	return $res;
+});
 ```
 - If your were to place this file _(along with its accompanying `.htaccess` file or the like)_ at the document root level (e.g. `public_html/index.php`), `commandstring/router` will mount all routes onto the domain root (e.g. `/`) and thus respond to `https://www.example.org/` and `https://www.example.org/hello`.
 
@@ -425,27 +401,34 @@ In case you **don't** want `commandstring/router` to automatically adapt itself 
 // Override auto base path detection
 $router->setBasePath('/');
 
-$router->get('/', function() { echo 'Index'; });
-$router->get('/hello', function() { echo 'Hello!'; });
+$router->get('/', function() {
+	$res->getBody()->write("Hello World!");
+	return $res;
+});
+
+$router->get('/hello', function() {
+	$res->getBody()->write("Hello World!");
+	return $res;
+});
 
 $router->run();
 ```
 
 If you were to place this file into a subfolder (e.g. `public_html/some/sub/folder/index.php`), it will still mount the routes onto the domain root (e.g. `/`) and thus respond to `https://www.example.org/` and `https://www.example.org/hello` _(given that your `.htaccess` file – placed at the document root level – rewrites requests to it)_
 
-## Integration with other libraries
+## Template library integration
 
-Integrate other libraries with `commandstring/router` by using the Environment class.
+Integrate other libraries with `commandstring/router` by using the Environment class. Bind your template loader to a property in the Env class then use the static method get to retrieve the instance and the property. You can use the HttpSoft's HTML Response class for returning a proper HTML response.
 ```php
 use CommandString\Router\Environment as Env;
 use CommandString\Router\Router;
 use HttpSoft\Response\HtmlResponse;
 
-$env = new Env("./env.example.json");
+$env = new Env(false);
 $router = new Router();
 
 $env->twig = new \Twig\Environment(new \Twig\Loader\FilesystemLoader("/path/to/views"), [
-    "cache" => "/path/to/cache"
+	"cache" => "/path/to/cache"
 ]);
 
 $router->get('/', function() {
@@ -455,8 +438,7 @@ $router->get('/', function() {
 $router->run();
 ```
 
-## Responding to a request
-
+## Responding to requests
 All response handlers **MUST** return an instance of `\Psr\Http\Message\ResponseInterface`. You can use the `$response` object passed into each handler *or* instantiate your own. I recommend taking a look at [HttpSoft/Response](https://httpsoft.org/docs/response/v1/#usage) for prebuilt response types.
 ```php
 $response = new HttpSoft\Response\HtmlResponse('<p>HTML</p>');
@@ -468,31 +450,39 @@ $response = new HttpSoft\Response\RedirectResponse('https/example.com');
 $response = new HttpSoft\Response\EmptyResponse();
 ```
 
-## A note on working with PUT
+## Environment Variables
+```php
+use CommandString\Router\Environment as Env; // You can use the as keyword to change the class name to Env, I'll understand
 
+$env = new Env("/path/to/environment.json"); // default: "./env.json" additionally if you set the parameter to false it will not load any files and instead create a blank stdClass.
+
+$env->mysql->username; // getting defined environment variables
+$env->mysql->username = "New Username"; // you cannot change environment variables once they've been defined.
+
+$env->newVariable = "something"; // you can declare new environment variables outside your environment.json
+```
+
+## A note on working with PUT
 There's no such thing as `$_PUT` in PHP. One must fake it:
 ```php
-$router->put('/movies/(\d+)', function($id) {
-    // Fake $_PUT
-    $_PUT  = array();
-    parse_str(file_get_contents('php://input'), $_PUT);
+$router->put('/movies/(\d+)', function($res, $id) {
+	// Fake $_PUT
+	$_PUT = array();
+	parse_str(file_get_contents('php://input'), $_PUT);
 
-    // ...
+	// ...
 });
 ```
 
 ## A note on making HEAD requests
-
 When making `HEAD` requests all output will be buffered to prevent any content trickling into the response body, as defined in [RFC2616 (Hypertext Transfer Protocol -- HTTP/1.1)](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.4):
 
-> The HEAD method is identical to GET except that the server MUST NOT return a message-body in the response. The metainformation contained in the HTTP headers in response to a HEAD request SHOULD be identical to the information sent in response to a GET request. This method can be used for obtaining metainformation about the entity implied by the request without transferring the entity-body itself. This method is often used for testing hypertext links for validity, accessibility, and recent modification.
+> The HEAD method is identical to GET except that the server MUST NOT return a message-body in the response. The meta information contained in the HTTP headers in response to a HEAD request SHOULD be identical to the information sent in response to a GET request. This method can be used for obtaining meta information about the entity implied by the request without transferring the entity-body itself. This method is often used for testing hypertext links for validity, accessibility, and recent modification.
 
 To achieve this, `commandstring/router` but will internally re-route `HEAD` requests to their equivalent `GET` request and automatically suppress all output.
 
 ## Acknowledgements
-
-`bramus/router` is inspired upon [Klein](https://github.com/chriso/klein.php), [Ham](https://github.com/radiosilence/Ham), and [JREAM/route](https://bitbucket.org/JREAM/route) . Whilst Klein provides lots of features it is not object oriented. Whilst Ham is Object Oriented, it's bad at _separation of concerns_ as it also provides templating within the routing class. Whilst JREAM/route is a good starting point it is limited in what it does (only GET routes for example).
+`commandstring/router` a fork of `bramus/router` with integration for HttpSoft's PSR-7 interface implementation and emmiter.
 
 ## License
-
 `commandstring/router` is released under the MIT public license. See the enclosed `LICENSE` for details.

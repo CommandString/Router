@@ -6,9 +6,19 @@ use RuntimeException;
 use stdClass;
 
 final class Environment {
+    /**
+     * @var object Holds environment variables
+     */
     private object $env;
+
+    /**
+     * @var self Holds current instance of the class
+     */
     private static self $instance;
 
+    /**
+     * @param string|bool $env_location
+     */
     public function __construct(string|bool $env_location = "./env.json")
     {
         if ($env_location === false) {
@@ -28,10 +38,17 @@ final class Environment {
         self::$instance = $this;
     }
 
+    /**
+     * @param string $name
+     */
     public function __get($name) {
         return $this->env->$name;
     }
 
+    /**
+     * @param string $name
+     * @param string $value
+     */
     public function __set($name, $value) {
         if (isset($this->env->$name)) {
             return;
@@ -40,6 +57,9 @@ final class Environment {
         $this->env->$name = $value;
     }
 
+    /**
+     * @return self
+     */
     public static function get(): self
     {
         return self::$instance;
