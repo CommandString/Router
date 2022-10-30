@@ -502,7 +502,7 @@ class Router
                 // Make sure it's callable
                 if ($reflectedMethod->isPublic() && (!$reflectedMethod->isAbstract())) {
                     if ($reflectedMethod->isStatic()) {
-                        forward_static_call_array(array($controller, $method), $params);
+                        $response = forward_static_call_array(array($controller, $method), $params);
                     } else {
                         // Make sure we have an instance, because a non-static method must not be called statically
                         if (\is_string($controller)) {
