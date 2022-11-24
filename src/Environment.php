@@ -42,7 +42,7 @@ final class Environment {
      * @param string $name
      */
     public function __get($name) {
-        return $this->env->$name;
+        return $this->env->$name ?? null;
     }
 
     /**
