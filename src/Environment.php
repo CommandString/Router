@@ -60,8 +60,8 @@ final class Environment {
     /**
      * @return self
      */
-    public static function get(): self
+    public static function get(string $property = ""): mixed
     {
-        return self::$instance;
+        return (empty($property)) ? self::$instance : self::$instance->$property;
     }
 }
