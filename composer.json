@@ -1,0 +1,13 @@
+{
+    "require": {
+        "react/http": "^1.8.0",
+        "twig/twig": "^3.4",
+        "commandstring/env": "^1.0",
+        "httpsoft/http-response": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Router\\Http\\": "./src"
+        }
+    }
+}

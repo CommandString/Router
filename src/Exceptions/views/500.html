@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.0/dist/semantic.min.js"></script>
+
+    <title>500 - Internal Server Error</title>
+
+    <style>
+        body>.segment {
+            height: fit-content !important;
+            border-radius: 0 !important;
+        }
+
+        .trace>span,
+        .trace>div {
+            display: inline-block !important;
+        }
+
+        .trace>span {
+            vertical-align: top;
+            font-size: 32px;
+            margin-right: 5px;
+        }
+
+        .trace>span:after {
+            border-right: white 3.5px solid;
+            content: "";
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui inverted segment">
+        <div class="ui massive dividing header">{{ Message }}</div>
+        <div class="ui inverted relaxed divided list">
+            {% for Number, Trace in StackTrace %}
+            <div class="item trace">
+                <span class="ui text">#{{ Number }}{% if Number == 0 %} {main}{% endif %}</span>
+                <div class="content">
+                    {% if Number == 0 %}
+                    <span class="header">{{ Main.file }}::{{ Main.line }}</span>
+                    <div class="description">{{ Trace.class }}{{ Trace.type }}{{ Trace.function }}</div>
+                    {% endif %}
+                    {% if Number != 0 %}
+                    <span class="header">{{ Trace.file }}::{{ Trace.line }}</span>
+                    <div class="description">{{ Trace.class }}{{ Trace.type }}{{ Trace.function }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
