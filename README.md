@@ -283,7 +283,7 @@ $router->map500("/(.*)", function ($req, $res) {
 
 Middleware is software that connects the model and view in an MVC application, facilitating the communication and data flow between these two components while also providing a layer of abstraction, decoupling the model and view and allowing them to interact without needing to know the details of how the other component operates.
 
-A good example is having before middleware that makes sure the user is an administrator before they go to a restricted page. You could do this in your routes controller for every admin page but that would be redundant. Or for after middleware in a REST API that returns JSONs you might want to make sure the body isn't a malformed JSON.
+A good example is having before middleware that makes sure the user is an administrator before they go to a restricted page. You could do this in your routes controller for every admin page but that would be redundant. Or for after middleware, you may have a REST API that returns a JSON response. You can have after middleware to make sure to make sure the JSON response isn't malformed.
 
 ## Before Middleware
 
