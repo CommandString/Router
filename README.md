@@ -60,6 +60,7 @@ $router->put('pattern', function() { /* ... */ });
 $router->delete('pattern', function() { /* ... */ });
 $router->options('pattern', function() { /* ... */ });
 $router->patch('pattern', function() { /* ... */ });
+$router->head('pattern', function() { /* ... */ });
 ```
 
 You can use this shorthand for a route that can be accessed using any method:
