@@ -9,6 +9,7 @@ use InvalidArgumentException;
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use React\Http\HttpServer;
 use React\Http\Message\ServerRequest;
 use React\Socket\SocketServer;
 use ReflectionMethod;
@@ -33,6 +34,7 @@ final class Router {
     private array $E500Handlers = [];
     private string $baseRoute = "";
     private Environment $twig;
+    private HttpServer $http;
 
     /**
      * @param SocketServer $socket
@@ -239,8 +241,12 @@ final class Router {
     /**
      * @return void
      */
-    public function listen() {
-        $http = new \React\Http\HttpServer(function (ServerRequestInterface $request) {
+    public function createHttpServer() {
+        if (isset($this->http)) {
+            return;
+        }
+
+        $this->http = new HttpServer(function (ServerRequestInterface $request) {
             try {
                 return $this->handle($request);
             } catch (\Throwable $e) {
@@ -267,8 +273,28 @@ final class Router {
                 }
             }
         });
+    }
 
-        $http->listen($this->socket);
+    public function listen() {
+        if (!isset($this->http)) {
+            $this->createHttpServer();
+        }
+
+        $this->http->listen($this->socket);
+    }
+
+    public function getHttpServer(): ?HttpServer
+    {
+        if (!isset($this->http)) {
+            $this->createHttpServer();
+        }
+
+        return $this->http;
+    }
+
+    public function getSocketServer(): ?SocketServer
+    {
+        return $this->socket;
     }
 
     /**
