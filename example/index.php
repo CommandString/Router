@@ -25,7 +25,8 @@ class Math {
     }
 }
 
-$router = new Router(new SocketServer("127.0.0.1:8000"), true);
+$socket = new SocketServer("127.0.0.1:8000");
+$router = new Router($socket, true);
 
 $router
     ->get("/(\d+)/plus/(\d+)", [Math::class, "addition"])
