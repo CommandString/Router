@@ -127,7 +127,7 @@ final class Router {
      */
     public function all(string $pattern, array|Closure $handler): self
     {
-        return $this->map([Methods::DELETE, Methods::GET, Methods::HEAD, Methods::OPTIONS, Methods::PATCH, Methods::POST, Methods::PUT] ,$pattern, $handler);
+        return $this->map([Methods::ALL] ,$pattern, $handler);
     }
 
     /**
