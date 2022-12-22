@@ -22,7 +22,7 @@ composer require commandstring/router
 You first need to create a ReactPHP SocketServer
 
 ```php
-$socket = new \React\Socket\SocketServer("{$env->server->ip}:{$env->server->port}");
+$socket = new \React\Socket\SocketServer("127.0.0.1:8000");
 ```
 
 Then create a router instance
