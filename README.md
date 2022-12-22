@@ -134,7 +134,7 @@ Note: The leading `/` at the very beginning of a route pattern is not mandatory,
 When multiple subpatterns are defined, the resulting __route handling parameters__ are passed into the route handling function in the order they are defined in:
 
 ```php
-$router->get('/movies/(\d+)/photos/(\d+)', function($res, $movieId, $photoId) {
+$router->get('/movies/(\d+)/photos/(\d+)', function($req, $res, $movieId, $photoId) {
     $res->getBody()->write('Movie #'.$movieId.', photo #'.$photoId);
     return $res;
 });
