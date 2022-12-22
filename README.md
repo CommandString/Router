@@ -10,6 +10,8 @@ A router package built that uses ReactPHP/HTTP under the hood
 - [Controllers](#controllers)
 - [Middleware](#middleware)
 - [Dev Mode](#dev-mode)
+- [Responses](#responding-to-requests)
+- [Advanced Usage](#running-and-advance-usage)
 - [Nodemon](#nodemon)
 
 ## Installation
@@ -32,6 +34,12 @@ $router = new \Router\Http\Router($socket, true);
 ```
 
 The second parameter is whether dev mode should be enabled or not you can read about dev mode [here](#dev-mode)
+
+create some routes then begin listening for requests
+
+```php
+$router->listen();
+```
 
 ## Routing
 
@@ -344,6 +352,20 @@ $response = new HttpSoft\Response\TextResponse('Text');
 $response = new HttpSoft\Response\XmlResponse('<xmltag>XML</xmltag>');
 $response = new HttpSoft\Response\RedirectResponse('https/example.com');
 $response = new HttpSoft\Response\EmptyResponse();
+```
+
+# Running and Advance Usage
+
+If you want more control over the http server you can use the getHttpServer method to create and return the HttpServer object
+
+```php
+$httpServer = $router->getHttpServer();
+```
+
+In addition to being able to retrieve the http server you can also retrieve the socket server with the getSocketServer method
+
+```php
+$socketServer = $router->getSocketServer();
 ```
 
 # Dev Mode
