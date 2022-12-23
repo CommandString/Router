@@ -343,7 +343,7 @@ $router->get("/home", function ($req, $res) {
 ```
 
 # Responding to requests
-All response handlers **MUST** return an instance of `\Psr\Http\Message\ResponseInterface`. You can use the `$response` object passed into each handler *or* instantiate your own. I recommend taking a look at [HttpSoft/Response](https://httpsoft.org/docs/response/v1/#usage) for prebuilt response types. This is also included with the route as it's used for the dev mode
+All controllers **MUST** return an implemantation of `\Psr\Http\Message\ResponseInterface`. You can use the premade response object passed into the controller *or* instantiate your own. I recommend taking a look at [HttpSoft/Response](https://httpsoft.org/docs/response/v1/#usage) for prebuilt response types. This is also included with the route as it's used for the dev mode
 ```php
 $response = new HttpSoft\Response\HtmlResponse('<p>HTML</p>');
 $response = new HttpSoft\Response\JsonResponse(['key' => 'value']);
