@@ -381,7 +381,7 @@ final class Router {
      */
     private function getMatchingRoutes(ServerRequest $request, array $routes, bool $findOne = false): array
     {
-        $uri = $request->getRequestTarget();
+        $uri = explode("?", $request->getRequestTarget())[0];
 
         $matched = [];
 
