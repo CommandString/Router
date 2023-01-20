@@ -10,6 +10,7 @@ use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use React\Http\HttpServer;
+use React\Http\Message\Response as MessageResponse;
 use React\Http\Message\ServerRequest;
 use React\Socket\SocketServer;
 use ReflectionMethod;
@@ -40,7 +41,7 @@ final class Router {
      * @param SocketServer $socket
      * @param bool $dev
      */
-    public function __construct(private SocketServer $socket, private bool $dev) {
+    public function __construct(private SocketServer $socket, private bool $dev = false) {
         if ($this->dev) {
             $this->twig = new Environment(new \Twig\Loader\FilesystemLoader(__DIR__ . "/Exceptions/views"));
         }
@@ -269,7 +270,7 @@ final class Router {
                         return new TextResponse("An internal server error has occurred", TextResponse::STATUS_INTERNAL_SERVER_ERROR);
                     }
 
-                    return $this->invoke($request, (new Response), $_500handler);
+                    return $this->invoke($request, (new Response), null, $_500handler);
                 }
             }
         });
@@ -299,16 +300,27 @@ final class Router {
 
     /**
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
+     * @param ResponseInterface|null $response
+     * @param Closure|null $next
      * @param array $route
-     * @throws LogicException 
-     * @throws InvalidResponse 
+     * @throws LogicException
+     * @throws InvalidResponse
      * @return ResponseInterface
      */
-    private function invoke(ServerRequestInterface $request, ResponseInterface $response, array $route): ResponseInterface
+    private function invoke(ServerRequestInterface $request, ?ResponseInterface $response, ?Closure $next, array $route): ResponseInterface
     {
+        if (is_null($response) && !is_null($next)) {
+            $params = [$request, $next];
+        } else if (!is_null($response) && is_null($next)) {
+            $params = [$request, $response];
+        } else {
+            $params = [$request, $response, $next];
+        }
+
+        $params = array_merge($params, $route["params"]);
+
         if (is_callable($route["fn"])) {
-            $return = call_user_func($route["fn"], $request, $response, ...$route["params"]);
+            $return = call_user_func($route["fn"], ...$params);
         } else if (is_array($route["fn"])) {
             $method = new ReflectionMethod($route["fn"][0], $route["fn"][1]);
             
@@ -316,7 +328,7 @@ final class Router {
                 throw new LogicException("You controller must be a static method");
             }
 
-            $return = $method->invoke(null, $request, $response, ...$route["params"]);
+            $return = $method->invoke(null, ...$params);
         }
 
         if (!$return instanceof ResponseInterface) {
@@ -333,10 +345,9 @@ final class Router {
      */
     private function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $beforeMiddleware = $this->getMatchingRoutes($request, $this->beforeMiddleware);
+        $beforeMiddleware = $this->getMatchingRoutes($request, $this->beforeMiddleware, true)[0] ?? null;
         $targetRoute = $this->getMatchingRoutes($request, $this->routes[$request->getMethod()], true)[0] ?? null;
-        $afterMiddleware = $this->getMatchingRoutes($request, $this->afterMiddleware);
-        $response = new Response;
+        $afterMiddleware = $this->getMatchingRoutes($request, $this->afterMiddleware, true)[0] ?? null;
 
         if (is_null($targetRoute)) {
             $_404handler = $this->getMatchingRoutes($request, $this->E404Handlers, true)[0] ?? null;
@@ -345,20 +356,22 @@ final class Router {
                 throw new InvalidRoute($request->getRequestTarget());
             }
 
-            $response = $this->invoke($request, $response, $_404handler);
-        } else {
-            foreach ($beforeMiddleware as $route) {
-                $response = $this->invoke($request, $response, $route);
-            }
-
-            $response = $this->invoke($request, $response, $targetRoute);
-
-            foreach ($afterMiddleware as $route) {
-                $response = $this->invoke($request, $response, $route);
-            }
+            return $this->invoke($request, new MessageResponse, null, $_404handler);
         }
 
-        return $response;
+        $next = function (ResponseInterface $response) use ($request, $targetRoute, $afterMiddleware) {
+            $next = function ($response) use ($afterMiddleware, $request) {
+                return $this->invoke($request, $response, null, $afterMiddleware);
+            };
+
+            return $this->invoke($request, $response, is_null($afterMiddleware) ? null : $next, $targetRoute);
+        };
+        
+        if ($beforeMiddleware !== null) {
+            return $this->invoke($request, null, $next, $beforeMiddleware);
+        } else {
+            return $next(new MessageResponse);
+        }
     }
 
     /**
