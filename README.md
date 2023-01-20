@@ -104,7 +104,7 @@ $router->get('/about', function($req, $res) {
 
 ## Dynamic PCRE-based Route Patterns
 
-This type of Route Patterns contain dynamic parts which can vary per request. The varying parts are named __subpatterns__ and are defined using regular expressions.
+This type of Route Pattern contains dynamic parts which can vary per request. The varying parts are named __subpatterns__ and are defined using regular expressions.
 
 Examples:
 
@@ -121,7 +121,7 @@ Commonly used PCRE-based subpatterns within Dynamic Route Patterns are:
 
 Note: The [PHP PCRE Cheat Sheet](https://courses.cs.washington.edu/courses/cse154/15sp/cheat-sheets/php-regex-cheat-sheet.pdf) might come in handy.
 
-The __subpatterns__ defined in Dynamic PCRE-based Route Patterns are converted to parameters which are passed into the route handling function. Prerequisite is that these subpatterns need to be defined as __parenthesized subpatterns__, which means that they should be wrapped between parens:
+The __subpatterns__ defined in Dynamic PCRE-based Route Patterns are converted to parameters that are passed into the route handling function. The prerequisite is that these subpatterns need to be defined as __parenthesized subpatterns__, which means that they should be wrapped between parenthesis:
 
 ```php
 // Bad
@@ -139,7 +139,7 @@ $router->get('/hello/(\w+)', function($req, $res, $name) {
 
 Note: The leading `/` at the very beginning of a route pattern is not mandatory, but is recommended.
 
-When multiple subpatterns are defined, the resulting __route handling parameters__ are passed into the route handling function in the order they are defined in:
+When multiple subpatterns are defined, the resulting __route handling parameters__ are passed into the route handling function in the order they are defined:
 
 ```php
 $router->get('/movies/(\d+)/photos/(\d+)', function($req, $res, $movieId, $photoId) {
@@ -150,7 +150,7 @@ $router->get('/movies/(\d+)/photos/(\d+)', function($req, $res, $movieId, $photo
 
 ## Dynamic Placeholder-based Route Patterns
 
-This type of Route Patterns are the same as __Dynamic PCRE-based Route Patterns__, but with one difference: they don't use regexes to do the pattern matching but they use the more easy __placeholders__ instead. Placeholders are strings surrounded by curly braces, e.g. `{name}`. You don't need to add parens around placeholders.
+This type of Route Pattern is the same as __Dynamic PCRE-based Route Patterns__, but with one difference: they don't use regexes to do the pattern matching but they use the more easy __placeholders__ instead. Placeholders are strings surrounded by curly braces, e.g. `{name}`. You don't need to add parens around placeholders.
 
 Examples:
 
@@ -166,7 +166,7 @@ $router->get('/movies/{movieId}/photos/{photoId}', function($req, $res, $movieId
 });
 ```
 
-Note: the name of the placeholder does not need to match with the name of the parameter that is passed into the route handling function:
+Note: the name of the placeholder does not need to match the name of the parameter that is passed into the route handling function:
 
 ```php
 $router->get('/movies/{foo}/photos/{bar}', function($req, $res, $movieId, $photoId) {
@@ -211,7 +211,7 @@ $router->get(
 
 The code snippet above responds to the URLs `/blog`, `/blog/year`, `/blog/year/month`, `/blog/year/month/day`, and `/blog/year/month/day/slug`.
 
-Note: With optional parameters it is important that the leading `/` of the subpatterns is put inside the subpattern itself. Don't forget to set default values for the optional parameters.
+Note: With optional parameters, it is important that the leading `/` of the subpatterns is put inside the subpattern itself. Don't forget to set default values for the optional parameters.
 
 The code snipped above unfortunately also responds to URLs like `/blog/foo` and states that the overview needs to be shown - which is incorrect. Optional subpatterns can be made successive by extending the parenthesized subpatterns so that they contain the other optional subpatterns: The pattern should resemble `/blog(/year(/month(/day(/slug))))` instead of the previous `/blog(/year)(/month)(/day)(/slug)`:
 ```php
@@ -277,7 +277,7 @@ $router->map404("/(.*)", function ($req, $res) {
 
 ## 500 handler
 
-Defining a 500 handler is **recommended** and is exactly same to mapping a 404 handler.
+Defining a 500 handler is **recommended** and is exactly the same as mapping a 404 handler.
 
 ```php
 $router->map500("/(.*)", function ($req, $res) {
@@ -291,34 +291,48 @@ $router->map500("/(.*)", function ($req, $res) {
 
 Middleware is software that connects the model and view in an MVC application, facilitating the communication and data flow between these two components while also providing a layer of abstraction, decoupling the model and view and allowing them to interact without needing to know the details of how the other component operates.
 
-A good example is having before middleware that makes sure the user is an administrator before they go to a restricted page. You could do this in your routes controller for every admin page but that would be redundant. Or for after middleware, you may have a REST API that returns a JSON response. You can have after middleware to make sure to make sure the JSON response isn't malformed.
+A good example is having before middleware that makes sure the user is an administrator before they go to a restricted page. You could do this in your routes controller for every admin page but that would be redundant. Or for after middleware, you may have a REST API that returns a JSON response. You can have after middleware to make sure the JSON response isn't malformed.
 
 ## Before Middleware
 
-You can define before middleware similar to a route by providing a method, pattern, and controller.
+You can define before middleware similar to a route by providing a method, pattern, and controller. Do note that with beforeMiddleware you're expected to create an object that implements ResponseInterface to pass to the main route.
 
 ```php
-use HttpSoft\Response\RedirectResponse;
-
-$router->beforeMiddleware([METHOD::ALL], "/admin?(.*)", function ($req, $res) {
+$router->beforeMiddleware("/admin?(.*)", function (ServerRequest $req, Closure $next) {
 	if (!isAdmin()) {
 		return new RedirectResponse("/", 403);
 	}
 
-	return $res;
+	return $next(new Response);
 });
 ```
 
-## After Middleware
+## In the main route for after middleware
 
-The only difference between defining after and before middleware is the method you use.
+If the router detects after middleware then the third parameter will be a closure with similar functionality to beforeMiddleware
 
 ```php
-use HttpSoft\Response\RedirectResponse;
+$router->all("/admin/roster/json", function (ServerRequest $req, Response $res, Closure $next) {
+	/*
+		some code that gets the admin roster and converts to json
+	*/
 
-$router->afterMiddleware([METHOD::ALL], "/admin?(.*)", function ($req, $res) {
-	if (!isAdmin()) {
-		return new RedirectResponse("/", 403);
+	$res->getBody()->write($jsonString);
+	$res->withHeader("content-type", "application/json");
+
+	return $next($res);
+});
+```
+## After Middleware
+
+```php
+$router->afterMiddleware("/admin?(.*)", function (ServerRequest $req, ResponseInterface $res) {
+	/*
+		some code that makes sure the body is a valid json string
+	*/
+
+	if (!jsonValid((string)$res->getBody())) {
+		return new EmptyResponse(500);
 	}
 
 	return $res;
