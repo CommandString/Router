@@ -339,6 +339,8 @@ $router->afterMiddleware("/admin?(.*)", function (ServerRequest $req, ResponseIn
 });
 ```
 
+*Special note about middleware, you can pass variables from beforeMiddleware to the main route or from the main route to afterMiddleware by supplying it as the second argument in the next closure.*
+
 # Template Engine Integration
 
 You can use [CommandString/Env](https://github.com/commandstring/env) to store your template engine object in a singleton. Then you can easily get it without trying to pass it around to your controller
