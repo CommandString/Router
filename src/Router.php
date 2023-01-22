@@ -307,7 +307,7 @@ final class Router {
      * @throws InvalidResponse
      * @return ResponseInterface
      */
-    private function invoke(ServerRequestInterface $request, ?ResponseInterface $response, ?Closure $next, array $route): ResponseInterface
+    private function invoke(ServerRequestInterface $request, ?ResponseInterface $response, ?Closure $next, array $route, mixed ...$extra): ResponseInterface
     {
         if (is_null($response) && !is_null($next)) {
             $params = [$request, $next];
@@ -317,7 +317,7 @@ final class Router {
             $params = [$request, $response, $next];
         }
 
-        $params = array_merge($params, $route["params"]);
+        $params = array_merge($params, $route["params"], $extra);
 
         if (is_callable($route["fn"])) {
             $return = call_user_func($route["fn"], ...$params);
@@ -359,12 +359,12 @@ final class Router {
             return $this->invoke($request, new MessageResponse, null, $_404handler);
         }
 
-        $next = function (ResponseInterface $response) use ($request, $targetRoute, $afterMiddleware) {
-            $next = function ($response) use ($afterMiddleware, $request) {
-                return $this->invoke($request, $response, null, $afterMiddleware);
+        $next = function (ResponseInterface $response, mixed ...$extra) use ($request, $targetRoute, $afterMiddleware) {
+            $next = function ($response, mixed ...$extra) use ($afterMiddleware, $request) {
+                return $this->invoke($request, $response, null, $afterMiddleware, ...$extra);
             };
 
-            return $this->invoke($request, $response, is_null($afterMiddleware) ? null : $next, $targetRoute);
+            return $this->invoke($request, $response, is_null($afterMiddleware) ? null : $next, $targetRoute, ...$extra);
         };
         
         if ($beforeMiddleware !== null) {
