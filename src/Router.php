@@ -19,7 +19,7 @@ use Twig\Environment;
 use Router\Http\Exceptions\InvalidResponse;
 use Router\Http\Exceptions\InvalidRoute;
 
-final class Router {
+class Router {
     private array $beforeMiddleware = [];
     private array $afterMiddleware = [];
     private array $routes = [
