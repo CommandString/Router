@@ -20,9 +20,9 @@ use Router\Http\Exceptions\InvalidResponse;
 use Router\Http\Exceptions\InvalidRoute;
 
 class Router {
-    private array $beforeMiddleware = [];
-    private array $afterMiddleware = [];
-    private array $routes = [
+    protected array $beforeMiddleware = [];
+    protected array $afterMiddleware = [];
+    protected array $routes = [
         Methods::GET->value => [],
         Methods::POST->value => [],
         Methods::PATCH->value => [],
@@ -31,17 +31,17 @@ class Router {
         Methods::OPTIONS->value => [],
         Methods::PUT->value => []
     ];
-    private array $E404Handlers = [];
-    private array $E500Handlers = [];
-    private string $baseRoute = "";
-    private Environment $twig;
-    private HttpServer $http;
+    protected array $E404Handlers = [];
+    protected array $E500Handlers = [];
+    protected string $baseRoute = "";
+    protected Environment $twig;
+    protected HttpServer $http;
 
     /**
      * @param SocketServer $socket
      * @param bool $dev
      */
-    public function __construct(private SocketServer $socket, private bool $dev = false) {
+    public function __construct(protected SocketServer $socket, protected bool $dev = false) {
         if ($this->dev) {
             $this->twig = new Environment(new \Twig\Loader\FilesystemLoader(__DIR__ . "/Exceptions/views"));
         }
@@ -307,7 +307,7 @@ class Router {
      * @throws InvalidResponse
      * @return ResponseInterface
      */
-    private function invoke(ServerRequestInterface $request, ?ResponseInterface $response, ?Closure $next, array $route, mixed ...$extra): ResponseInterface
+    protected function invoke(ServerRequestInterface $request, ?ResponseInterface $response, ?Closure $next, array $route, mixed ...$extra): ResponseInterface
     {
         if (is_null($response) && !is_null($next)) {
             $params = [$request, $next];
@@ -343,7 +343,7 @@ class Router {
      * @throws InvalidRoute 
      * @return ResponseInterface
      */
-    private function handle(ServerRequestInterface $request): ResponseInterface
+    protected function handle(ServerRequestInterface $request): ResponseInterface
     {
         $beforeMiddleware = $this->getMatchingRoutes($request, $this->beforeMiddleware, true)[0] ?? null;
         $targetRoute = $this->getMatchingRoutes($request, $this->routes[$request->getMethod()], true)[0] ?? null;
@@ -380,7 +380,7 @@ class Router {
      * @param array|null $matches
      * @return bool
      */
-    private function patternMatches(string $pattern, string $uri, array|null &$matches): bool
+    protected function patternMatches(string $pattern, string $uri, array|null &$matches): bool
     {
       $pattern = preg_replace('/\/{(.*?)}/', '/(.*?)', $pattern);
 
@@ -392,7 +392,7 @@ class Router {
      * @param array $routes
      * @return array
      */
-    private function getMatchingRoutes(ServerRequest $request, array $routes, bool $findOne = false): array
+    protected function getMatchingRoutes(ServerRequest $request, array $routes, bool $findOne = false): array
     {
         $uri = explode("?", $request->getRequestTarget())[0];
 
