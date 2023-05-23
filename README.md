@@ -1,4 +1,10 @@
-# CommandString/Router
+# This is now abandonware!
+
+If you still need a router in React/Http, checkout [Tnapf/Router](https://github.com/tnapf/Router#reacthttp-integration)
+
+
+---
+# ~~CommandString/Router~~
 
 A router package built that uses ReactPHP/HTTP under the hood
 
